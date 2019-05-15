@@ -1,0 +1,6 @@
+<div style="background-color: aquamarine">
+  <% if logged_in? %>
+    <div><%= link_to current_user.name, user_path(id: current_user) %></div>
+    <div><%= link_to 'Logout', logout_path, method: :delete %></div>
+  <% end %>
+</div>
