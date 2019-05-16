@@ -1,8 +1,6 @@
 <h1>コード一覧</h1>
 
 <% @codes.each do |code| %>
-  <%= code.content %><br>
-  <hr>
-  <%= code.user.name %><br>
+  <%= link_to code.content, code_path(id: code.id) %>
   <hr>
 <% end %>
