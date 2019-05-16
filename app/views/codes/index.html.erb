@@ -1,2 +1,8 @@
-<h1>Codes#index</h1>
-<p>Find me in app/views/codes/index.html.erb</p>
+<h1>コード一覧</h1>
+
+<% @codes.each do |code| %>
+  <%= code.content %><br>
+  <hr>
+  <%= code.user.name %><br>
+  <hr>
+<% end %>
