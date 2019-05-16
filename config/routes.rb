@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'codes/index'
+  get 'codes/new'
+  get 'codes/show'
   get 'sessions/new'
   root "users#new"
   get    'login'   => 'sessions#new'
