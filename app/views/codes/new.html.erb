@@ -1,0 +1,7 @@
+<h1>コード提出</h1>
+
+<%= form_with model: @code do |f| %>
+  <%= f.label :content %>
+  <%= f.text_area :content %>
+  <%= f.submit %>
+<% end %>
