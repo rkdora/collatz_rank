@@ -11,5 +11,8 @@
   <hr>
   <div class="code"><%= @code.code_time.out_put %></div>
 <% else %>
-  <%= button_to '計測', times_path(time: {code_id: @code.id}), method: :post %>
+
+  <%= form_with url: times_path(time: {code_id: @code.id}) do |f| %>
+    <%= f.submit '計測', data: { "disable-with": "計測しています..." } %>
+  <% end %>
 <% end %>
