@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
-  get 'sessions/new'
-  root "users#new"
+  root 'times#index'
   get    'login'   => 'sessions#new'
   post   'login'   => 'sessions#create'
   delete 'logout'  => 'sessions#destroy'
-  resources "users"
+  resources 'users'
+  resources 'codes'
+  resources 'times'
 end

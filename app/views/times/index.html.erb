@@ -1,0 +1,11 @@
+<h1>ランキング</h1>
+
+<ol>
+  <% @code_times.each do |code_time| %>
+    <li>
+      <%= link_to "time: #{code_time.time.to_s}[ms]", code_path(id: code_time.code.id) %>
+      <%= link_to code_time.code.user.name, user_path(code_time.code.user), style: 'float: right' %>
+    </li>
+    <hr>
+  <% end %>
+</ol>
