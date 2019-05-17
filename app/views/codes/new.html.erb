@@ -1,6 +1,7 @@
 <h1>コード提出</h1>
 
-<%= form_with model: @code do |f| %>
+<%= form_with model: @code, local: true do |f| %>
+  <%= inform_validation_error @code %>
   <%= f.label :content %>
   <%= f.text_area :content %>
   <%= f.submit %>

@@ -13,7 +13,7 @@ class UsersController < ApplicationController
       log_in @user
       redirect_to @user
     else
-      render 'new'
+      render :new
     end
   end
 
@@ -26,5 +26,4 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:name, :password, :password_confirmation)
   end
-
 end
