@@ -14,9 +14,9 @@ class TimesController < ApplicationController
                               time: cpu_time,
                               out_put: code_out_put)
     if @code_time.save
-      redirect_to times_path, success: '計測に成功しました'
+      redirect_to root_path, success: '計測に成功しました'
     else
-      redirect_to times_path, danger: '計測に失敗しました'
+      redirect_to root_path, danger: '計測に失敗しました'
     end
   end
 end
