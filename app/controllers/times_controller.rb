@@ -1,6 +1,6 @@
 class TimesController < ApplicationController
   def index
-    @code_times = CodeTime.all
+    @code_times = CodeTime.all.order(:time)
   end
 
   def create
