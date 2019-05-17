@@ -8,7 +8,11 @@ class TimesController < ApplicationController
     File.open('test.rkt', 'w') do |text|
       text.puts(@code.content)
     end
-    @code_time = CodeTime.new(code_id: @code.id, time: `racket test.rkt`)
+    code_out_put = `racket test.rkt`
+    cpu_time = code_out_put.split(' ')[2]
+    @code_time = CodeTime.new(code_id: @code.id,
+                              time: cpu_time,
+                              out_put: code_out_put)
     if @code_time.save
       redirect_to times_path, success: '計測に成功しました'
     else

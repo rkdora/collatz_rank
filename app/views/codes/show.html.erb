@@ -1,7 +1,15 @@
 <h1>コード詳細</h1>
 
-<%= @code.content %>
+<div class="code"><%= @code.content %></div>
 <hr>
-<%= @code.user.name %>
+<p>提出者: <%= @code.user.name %></p>
+<hr>
 
-<%= button_to '計測', times_path(time: {code_id: @code.id}), method: :post %>
+<% if @code.code_time %>
+  <p>タイム：　<%= @code.code_time.time %>[ms]</p><br>
+  <p>出力</p>
+  <hr>
+  <div class="code"><%= @code.code_time.out_put %></div>
+<% else %>
+  <%= button_to '計測', times_path(time: {code_id: @code.id}), method: :post %>
+<% end %>
