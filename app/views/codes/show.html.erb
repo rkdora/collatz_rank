@@ -1,5 +1,18 @@
 <h1>コード詳細</h1>
 
-<%= @code.content %>
+<div class="code"><%= @code.content %></div>
 <hr>
-<%= @code.user.name %>
+<p>提出者: <%= @code.user.name %></p>
+<hr>
+
+<% if @code.code_time %>
+  <p>タイム：　<%= @code.code_time.time.to_s %>[ms]</p><br>
+  <p>出力</p>
+  <hr>
+  <div class="code"><%= @code.code_time.out_put %></div>
+<% else %>
+
+  <%= form_with url: times_path(time: {code_id: @code.id}) do |f| %>
+    <%= f.submit '計測', data: { "disable-with": "計測しています..." } %>
+  <% end %>
+<% end %>
