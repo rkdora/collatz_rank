@@ -3,3 +3,5 @@
 <%= @code.content %>
 <hr>
 <%= @code.user.name %>
+
+<%= button_to '計測', times_path(time: {code_id: @code.id}), method: :post %>

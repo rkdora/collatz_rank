@@ -8,7 +8,7 @@ class CodesController < ApplicationController
   def new
     @code = Code.new
   end
-  
+
   def create
     @code = current_user.codes.build(code_params)
     if @code.save
