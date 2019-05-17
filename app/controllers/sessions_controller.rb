@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
       log_in user
       redirect_to user
     else
-      render :new
+      redirect_to login_path, danger: '名前かパスワードが間違っています'
     end
   end
 

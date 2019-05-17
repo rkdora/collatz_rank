@@ -12,7 +12,7 @@ class CodesController < ApplicationController
   def create
     @code = current_user.codes.build(code_params)
     if @code.save
-      redirect_to @code
+      redirect_to @code, success: '提出に成功しました'
     else
       render 'new'
     end
