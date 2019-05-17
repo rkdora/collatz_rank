@@ -1,0 +1,6 @@
+<h1>タイム一覧</h1>
+
+<% @code_times.each do |code_time| %>
+  <%= link_to code_time.time, code_path(id: code_time.code.id) %>
+  <hr>
+<% end %>
