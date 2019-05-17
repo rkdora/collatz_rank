@@ -2,11 +2,13 @@
 
 <div class="code"><%= @code.content %></div>
 <hr>
-<p>提出者: <%= @code.user.name %></p>
+<p>提出者:　<%= link_to @code.user.name, user_path(@code.user) %></p>
+<p>提出日時：　<%= @code.created_at %></p>
 <hr>
 
 <% if @code.code_time %>
-  <p>タイム：　<%= @code.code_time.time.to_s %>[ms]</p><br>
+  <p>タイム：　<%= link_to "#{@code.code_time.time.to_s} [ms]", times_path %></p>
+  <p>計測日時：　<%= @code.code_time.created_at %></p>
   <p>出力</p>
   <hr>
   <div class="code"><%= @code.code_time.out_put %></div>
