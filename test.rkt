@@ -1,3 +1,3 @@
 #lang racket
 
-(time (apply * (range 1 10000)))
+(time (apply * (range 1 1000)))

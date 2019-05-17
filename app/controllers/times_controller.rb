@@ -9,7 +9,7 @@ class TimesController < ApplicationController
       text.puts(@code.content)
     end
     code_out_put = `racket test.rkt`
-    cpu_time = code_out_put.split(' ')[2]
+    cpu_time = code_out_put.split(' ')[2].to_i
     @code_time = CodeTime.new(code_id: @code.id,
                               time: cpu_time,
                               out_put: code_out_put)

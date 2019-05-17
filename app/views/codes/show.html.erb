@@ -6,7 +6,7 @@
 <hr>
 
 <% if @code.code_time %>
-  <p>タイム：　<%= @code.code_time.time %>[ms]</p><br>
+  <p>タイム：　<%= @code.code_time.time.to_s %>[ms]</p><br>
   <p>出力</p>
   <hr>
   <div class="code"><%= @code.code_time.out_put %></div>
