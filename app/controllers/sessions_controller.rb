@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  before_action :authorized, only: %i[new create destroy]
+
   def new; end
 
   def create

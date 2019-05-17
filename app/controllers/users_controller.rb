@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :authorized, only: %i[new create]
+
   def index
     @users = User.all
   end
