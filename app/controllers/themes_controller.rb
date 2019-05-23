@@ -1,4 +1,6 @@
 class ThemesController < ApplicationController
+  before_action :authorize, only: %i[new create]
+
   def index
     @themes = Theme.all
   end

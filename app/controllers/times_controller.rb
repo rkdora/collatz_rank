@@ -1,4 +1,6 @@
 class TimesController < ApplicationController
+  before_action :authorize, only: %i[create]
+
   def create
     @code = Code.find(params[:time][:code_id])
     File.open('test.rkt', 'w') do |text|
