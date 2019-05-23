@@ -1,7 +1,5 @@
 class TimesController < ApplicationController
-  def index
-    @code_times = CodeTime.all.order(:time)
-  end
+  before_action :authorize, only: %i[create]
 
   def create
     @code = Code.find(params[:time][:code_id])
