@@ -1,8 +1,4 @@
 class TimesController < ApplicationController
-  def index
-    @code_times = CodeTime.all.order(:time)
-  end
-
   def create
     @code = Code.find(params[:time][:code_id])
     File.open('test.rkt', 'w') do |text|

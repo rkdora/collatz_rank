@@ -18,11 +18,12 @@ class ThemesController < ApplicationController
 
   def show
     @theme = Theme.find(params[:id])
+    @codes = Code.left_joins(:code_time).where(theme_id: @theme.id)
   end
 
   private
 
   def theme_params
-    params.require(:theme).permit(:title, body)
+    params.require(:theme).permit(:title, :body)
   end
 end

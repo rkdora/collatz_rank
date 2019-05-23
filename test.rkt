@@ -1,1 +1,2 @@
-#lang racket (time (apply * (range 1 100)))
+#lang racket
+(time (+ 1 2))
