@@ -1,0 +1,10 @@
+<% @themes.each do |theme| %>
+  <h2><%= link_to theme.title, theme_path(theme) %></h2>
+<% end %>
+
+<% if logged_in? %>
+  <%= link_to '新規作成', new_theme_path, class: "btn btn-primary" %>
+<% end %>
+
+<hr>
+<%= render 'themes/changes' %>

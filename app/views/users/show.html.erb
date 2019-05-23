@@ -2,7 +2,7 @@
 
 <p>提出コード一覧</p>
 <% @user.codes.each do |code| %>
-  <%= link_to code.code_time.time.to_s, code_path(code) %>
+  <%= link_to "#{code.theme.title}: #{code.code_time.time.to_s} [ms]", code_path(code) %>
   <div style="float: right"><%= code.created_at %></div>
   <hr>
 <% end %>

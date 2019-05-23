@@ -1,0 +1,22 @@
+<h1><%= @theme.title %></h1>
+
+<hr>
+
+<%= link_to '提出', new_theme_code_path(@theme), class: "btn btn-lg btn-primary" %>
+
+<hr>
+
+<h2>ランキング</h2>
+<% if @codes %>
+  <ol>
+    <% @codes.each do |code| %>
+      <li>
+        <%= link_to "time: #{code.code_time.time.to_s}[ms]", code_path(code) %>
+        <%= link_to code.user.name, user_path(code.user), style: 'float: right' %>
+      </li>
+      <hr>
+    <% end %>
+  </ol>
+<% else %>
+  <p>提出済みのコードはありません</p>
+<% end %>

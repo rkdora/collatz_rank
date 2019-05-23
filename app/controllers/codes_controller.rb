@@ -11,6 +11,7 @@ class CodesController < ApplicationController
 
   def create
     @code = current_user.codes.build(code_params)
+    @code.theme_id = params[:theme_id]
     if @code.save
       redirect_to @code, success: '提出に成功しました'
     else
