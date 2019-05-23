@@ -20,7 +20,7 @@ class ThemesController < ApplicationController
 
   def show
     @theme = Theme.find(params[:id])
-    @codes = Code.left_joins(:code_time).where(theme_id: @theme.id)
+    @codes = Code.where(theme_id: @theme.id).left_joins(:code_time).order(:time)
   end
 
   private
