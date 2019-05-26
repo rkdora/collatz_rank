@@ -15,6 +15,7 @@
 ## Requirement
 - Rails 5.2.3
 - Ruby 2.6.1
+- Racket 7.2
 
 ## Usage
 ログイン中のみ、コード提出・テーマ作成が可能。  
