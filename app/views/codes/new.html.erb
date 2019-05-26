@@ -1,8 +1,23 @@
 <h1>コード提出</h1>
 
+<h3>注意点</h3>
+<ul>
+  <li>動作確認してから提出する</li>
+  <li>現在はracketのみ対応</li>
+  <li>例のように、timeで囲む</li>
+</ul>
+
+<pre style="background-color: #F7F7F7;">
+  例
+  <code>
+    #lang racket
+    (time (apply * (range 1 1000)))
+  </code>
+</pre>
+
 <%= form_with model: @code, url: theme_codes_path(theme_id: params[:theme_id]), local: true do |f| %>
   <%= inform_validation_error @code %>
-  <%= f.label :content %>
-  <%= f.text_area :content, class: 'form-control' %>
+  <p>コード</p>
+  <%= f.text_area :content, class: 'form-control', style: "height: 50vh;" %>
   <%= f.submit '提出', class: 'btn btn-primary' %>
 <% end %>
