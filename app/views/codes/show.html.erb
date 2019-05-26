@@ -8,7 +8,7 @@
 <p>提出日時：　<%= @code.created_at %></p>
 <hr>
 
-<% if @code.code_time %>
+<% unless @code.code_time.nil? %>
   <p>タイム：　<%= link_to "#{@code.code_time.time.to_s} [ms]", theme_path(@code.theme) %></p>
   <p>計測日時：　<%= @code.code_time.created_at %></p>
 

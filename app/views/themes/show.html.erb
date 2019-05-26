@@ -1,5 +1,8 @@
 <h1><%= @theme.title %></h1>
 
+<% unless @theme.nil? %>
+  <%= simple_format @theme.body %>
+<% end %>
 <hr>
 
 <%= link_to '提出', new_theme_code_path(@theme), class: "btn btn-lg btn-primary" %>
@@ -10,11 +13,13 @@
 <% if @codes %>
   <ol>
     <% @codes.each do |code| %>
-      <li>
-        <%= link_to "time: #{code.code_time.time.to_s}[ms]", code_path(code) %>
-        <%= link_to code.user.name, user_path(code.user), style: 'float: right' %>
-      </li>
-      <hr>
+      <% unless code.code_time.nil? %>
+        <li>
+          <%= link_to "time: #{code.code_time.time.to_s}[ms]", code_path(code) %>
+          <%= link_to code.user.name, user_path(code.user), style: 'float: right' %>
+        </li>
+        <hr>
+      <% end %>
     <% end %>
   </ol>
 <% else %>
