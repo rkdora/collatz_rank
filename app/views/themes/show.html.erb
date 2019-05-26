@@ -10,11 +10,13 @@
 <% if @codes %>
   <ol>
     <% @codes.each do |code| %>
-      <li>
-        <%= link_to "time: #{code.code_time.time.to_s}[ms]", code_path(code) %>
-        <%= link_to code.user.name, user_path(code.user), style: 'float: right' %>
-      </li>
-      <hr>
+      <% unless code.code_time.nil? %>
+        <li>
+          <%= link_to "time: #{code.code_time.time.to_s}[ms]", code_path(code) %>
+          <%= link_to code.user.name, user_path(code.user), style: 'float: right' %>
+        </li>
+        <hr>
+      <% end %>
     <% end %>
   </ol>
 <% else %>
