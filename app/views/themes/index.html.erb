@@ -1,7 +1,7 @@
 <% @themes.each do |theme| %>
   <h2>
     <%= link_to theme.title, theme_path(theme) %>
-    <% if current_user.admin? %>
+    <% if logged_in? && current_user.admin? %>
       | <%= link_to "delete", theme, method: :delete,
                   data: { confirm: "You sure?" } %>
     <% end %>

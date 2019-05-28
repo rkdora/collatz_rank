@@ -4,8 +4,16 @@
 <% @user.codes.each do |code| %>
   <% if code.code_time.nil? %>
     <%= link_to "#{code.theme.title}: 未計測", code_path(code) %>
+    <% if  logged_in? && current_user.admin? %>
+      | <%= link_to "delete", code, method: :delete,
+                    data: { confirm: "You sure?" } %>
+    <% end %>
   <% else %>
     <%= link_to "#{code.theme.title}: #{code.code_time.time.to_s} [ms]", code_path(code) %>
+    <% if  logged_in? && current_user.admin? %>
+      | <%= link_to "delete", code, method: :delete,
+                    data: { confirm: "You sure?" } %>
+    <% end %>
   <% end %>
   <div style="float: right"><%= code.created_at %></div>
   <hr>
