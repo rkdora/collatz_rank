@@ -17,6 +17,10 @@
         <li>
           <%= link_to "time: #{code.code_time.time.to_s}[ms]", code_path(code) %>
           <%= link_to code.user.name, user_path(code.user), style: 'float: right' %>
+          <% if  logged_in? && current_user.admin? %>
+            | <%= link_to "delete", code, method: :delete,
+                          data: { confirm: "You sure?" } %>
+          <% end %>
         </li>
         <hr>
       <% end %>
