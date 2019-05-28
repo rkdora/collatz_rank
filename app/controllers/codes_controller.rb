@@ -1,5 +1,6 @@
 class CodesController < ApplicationController
-  before_action :authorize, only: %i[new create]
+  before_action :authorize, only: %i[new create destroy]
+  before_action :admin_user, only: :destroy
 
   def index
     @codes = Code.all
@@ -21,6 +22,12 @@ class CodesController < ApplicationController
 
   def show
     @code = Code.find(params[:id])
+  end
+
+  def destroy
+    Code.find(params[:id]).destroy
+    flash[:success] = "Code deleted"
+    redirect_to root_path
   end
 
   private

@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  before_action :authorized, only: %i[new create]
+  before_action :authorized, only: %i[new create destroy]
+  before_action :admin_user, only: :destroy
 
   def index
     @users = User.all
@@ -21,6 +22,12 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+  end
+
+  def destroy
+    User.find(params[:id]).destroy
+    flash[:success] = "User deleted"
+    redirect_to users_path
   end
 
   private

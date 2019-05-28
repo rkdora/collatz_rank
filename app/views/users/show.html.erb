@@ -7,6 +7,10 @@
   <% else %>
     <%= link_to "#{code.theme.title}: #{code.code_time.time.to_s} [ms]", code_path(code) %>
   <% end %>
+  <% if  logged_in? && current_user.admin? %>
+    | <%= link_to "delete", code, method: :delete,
+                  data: { confirm: "You sure?" } %>
+  <% end %>
   <div style="float: right"><%= code.created_at %></div>
   <hr>
 <% end %>
