@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :authorized, only: %i[new create]
+  before_action :admin_user,     only: :destroy
 
   def index
     @users = User.all
@@ -23,9 +24,19 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  def destroy
+    User.find(params[:id]).destroy
+    flash[:success] = "User deleted"
+    redirect_to users_path
+  end
+
   private
 
   def user_params
     params.require(:user).permit(:name, :password, :password_confirmation)
+  end
+
+  def admin_user
+    redirect_to(root_path, danger: "管理者以外は、その操作はできません") unless current_user.admin?
   end
 end
