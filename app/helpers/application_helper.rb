@@ -10,4 +10,8 @@ module ApplicationHelper
     end
     raw(html_text)
   end
+
+  def simple_time(time)
+    time.strftime("%Y-%m-%d　%H:%M　")
+  end
 end
