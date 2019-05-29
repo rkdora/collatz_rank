@@ -2,15 +2,17 @@
 
 <h3><%= link_to @code.theme.title, theme_path(@code.theme) %></h3>
 
-<div class="code" style="background-color: aliceblue"><%= simple_format @code.content %></div>
+<div class="code" style="background-color: aliceblue">
+  <pre><code><%= @code.content %></code></pre>
+</div>
 <hr>
 <p>提出者:　<%= link_to @code.user.name, user_path(@code.user) %></p>
-<p>提出日時：　<%= @code.created_at %></p>
+<p>提出日時：　<%= simple_time @code.created_at %></p>
 <hr>
 
 <% unless @code.code_time.nil? %>
   <p>タイム：　<%= link_to "#{@code.code_time.time.to_s} [ms]", theme_path(@code.theme) %></p>
-  <p>計測日時：　<%= @code.code_time.created_at %></p>
+  <p>計測日時：　<%= simple_time @code.code_time.created_at %></p>
 
   <hr>
   <p>出力</p>
