@@ -1,6 +1,5 @@
 class CodesController < ApplicationController
   before_action :authorize, only: %i[new create destroy]
-  before_action :admin_user, only: :destroy
 
   def index
     @codes = Code.all
