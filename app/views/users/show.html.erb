@@ -11,6 +11,6 @@
     | <%= link_to "delete", code, method: :delete,
                   data: { confirm: "You sure?" } %>
   <% end %>
-  <div style="float: right"><%= code.created_at %></div>
+  <div style="float: right"><%= simple_time code.created_at %></div>
   <hr>
 <% end %>
