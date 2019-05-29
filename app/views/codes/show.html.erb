@@ -2,7 +2,9 @@
 
 <h3><%= link_to @code.theme.title, theme_path(@code.theme) %></h3>
 
-<div class="code" style="background-color: aliceblue"><%= simple_format @code.content %></div>
+<div class="code" style="background-color: aliceblue">
+  <pre><code><%= @code.content %></code></pre>
+</div>
 <hr>
 <p>提出者:　<%= link_to @code.user.name, user_path(@code.user) %></p>
 <p>提出日時：　<%= @code.created_at %></p>
