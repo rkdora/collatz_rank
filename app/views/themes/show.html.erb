@@ -18,11 +18,11 @@
     <% @codes.each_with_index do |code, i| %>
       <li>
         <%= link_to code.user.name, user_path(code.user) %>
-        <% if i.zero? && hide_code_time(code) %>
-          <p style="float: right"><%= "#{code.code_time.time.to_s}[ms]　/　　#{simple_time code.code_time.created_at}" %></p>
-        <% else %>
+        <% if (logged_in? && (current_user.admin? || current_user == code.user)) || (!i.zero? || !hide_code_time(code)) %>
           <%= link_to "#{code.code_time.time.to_s}[ms]　/　　#{simple_time code.code_time.created_at}",
                       code_path(code), style: 'float: right;' %>
+        <% else %>
+          <p style="float: right"><%= "#{code.code_time.time.to_s}[ms]　/　　#{simple_time code.code_time.created_at}" %></p>
         <% end %>
         <% if  logged_in? && (current_user.admin? || current_user == code.user) %>
           <%= link_to "delete", code, method: :delete,
