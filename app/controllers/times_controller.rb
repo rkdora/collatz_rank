@@ -11,10 +11,10 @@ class TimesController < ApplicationController
     @code_time = CodeTime.new(code_id: @code.id,
                               time: cpu_time,
                               out_put: code_out_put)
-    if @code_time.save
+    if code_out_put != "" && @code_time.save
       redirect_to @code_time.code, success: '計測に成功しました'
     else
-      redirect_to @code_time.code, danger: '計測に失敗しました'
+      redirect_to @code, danger: '計測に失敗しました'
     end
   end
 end

@@ -1,4 +1,4 @@
-<h1>問題作成</h1>
+<h1>問題編集</h1>
 
 <%= form_with model: @theme, local: true do |f| %>
   <%= inform_validation_error @theme %>
@@ -7,5 +7,5 @@
   <%= f.label :body %>
   <%= f.text_area :body, class: 'form-control' %>
   <p>回答例を載せましょう。</p>
-  <%= f.submit '作成', class: 'btn btn-primary' %>
+  <%= f.submit '更新', class: 'btn btn-primary' %>
 <% end %>

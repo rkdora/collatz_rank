@@ -5,6 +5,12 @@
 <div class="code" style="background-color: aliceblue">
   <pre><code><%= @code.content %></code></pre>
 </div>
+
+<% if  logged_in? && (current_user.admin? || current_user == @code.user) %>
+  <%= link_to "delete", @code, method: :delete,
+              data: { confirm: "You sure?" }, class: "btn btn-danger",
+              style: 'float: right; margin-right: 20px;' %>
+<% end %>
 <hr>
 <p>提出者:　<%= link_to @code.user.name, user_path(@code.user) %></p>
 <p>提出日時：　<%= simple_time @code.created_at %></p>

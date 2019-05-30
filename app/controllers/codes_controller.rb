@@ -1,10 +1,6 @@
 class CodesController < ApplicationController
   before_action :authorize, only: %i[new create destroy]
 
-  def index
-    @codes = Code.all
-  end
-
   def new
     @code = Code.new
   end

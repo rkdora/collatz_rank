@@ -1,16 +1,1 @@
 <h1><%= @user.name %></h1>
-
-<p>提出コード一覧</p>
-<% @user.codes.each do |code| %>
-  <% if code.code_time.nil? %>
-    <%= link_to "#{code.theme.title}: 未計測", code_path(code) %>
-  <% else %>
-    <%= link_to "#{code.theme.title}: #{code.code_time.time.to_s} [ms]", code_path(code) %>
-  <% end %>
-  <% if  logged_in? && (current_user.admin? || current_user == @user) %>
-    | <%= link_to "delete", code, method: :delete,
-                  data: { confirm: "You sure?" } %>
-  <% end %>
-  <div style="float: right"><%= simple_time code.created_at %></div>
-  <hr>
-<% end %>
