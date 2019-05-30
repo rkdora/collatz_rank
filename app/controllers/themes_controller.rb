@@ -1,5 +1,5 @@
 class ThemesController < ApplicationController
-  before_action :authorize, only: %i[new create destory]
+  before_action :authorize, only: %i[new create edit update destory]
   before_action :admin_user, only: %i[edit update destroy]
 
   def index
