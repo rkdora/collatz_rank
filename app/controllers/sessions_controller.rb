@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
     user = User.find_by(name: params[:name])
     if user&.authenticate(params[:password])
       log_in user
-      redirect_to user
+      redirect_to root_path
     else
       redirect_to login_path, danger: '名前かパスワードが間違っています'
     end
