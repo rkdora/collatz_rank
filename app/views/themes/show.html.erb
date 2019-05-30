@@ -15,7 +15,7 @@
     <% @codes.each_with_index do |code, i| %>
       <li>
         <%= link_to code.user.name, user_path(code.user) %>
-        <% if i.zero? %>
+        <% if i.zero? && hide_code_time(code) %>
           <p style="float: right"><%= "#{code.code_time.time.to_s}[ms]　/　　#{simple_time code.code_time.created_at}" %></p>
         <% else %>
           <%= link_to "#{code.code_time.time.to_s}[ms]　/　　#{simple_time code.code_time.created_at}",
