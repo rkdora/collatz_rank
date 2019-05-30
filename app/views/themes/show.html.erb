@@ -22,7 +22,10 @@
           <%= link_to "#{code.code_time.time.to_s}[ms]　/　　#{simple_time code.code_time.created_at}",
                       code_path(code), style: 'float: right;' %>
         <% else %>
-          <p style="float: right"><%= "#{code.code_time.time.to_s}[ms]　/　　#{simple_time code.code_time.created_at}" %></p>
+          <p style="float: right">
+            ランキングトップのコードは、計測時から7日間を過ぎるまで詳細確認することはできません。
+            <%= "#{code.code_time.time.to_s}[ms]　/　　#{simple_time code.code_time.created_at}" %>
+          </p>
         <% end %>
       </li>
       <hr>
