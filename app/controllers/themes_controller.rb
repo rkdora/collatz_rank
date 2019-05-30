@@ -1,6 +1,6 @@
 class ThemesController < ApplicationController
   before_action :authorize, only: %i[new create destory]
-  before_action :admin_user, only: :destroy
+  before_action :admin_user, only: %i[edit update destroy]
 
   def index
     @themes = Theme.all
@@ -24,10 +24,22 @@ class ThemesController < ApplicationController
     @codes = Code.joins(:code_time).eager_load(:code_time).where(theme_id: @theme.id).order(:time)
   end
 
+  def edit
+    @theme = Theme.find(params[:id])
+  end
+
+  def update
+    @theme = Theme.find(params[:id])
+    if @theme.update(theme_params)
+      redirect_to @theme, success: "Theme updated"
+    else
+      render :edit
+    end
+  end
+
   def destroy
     Theme.find(params[:id]).destroy
-    flash[:success] = "Theme deleted"
-    redirect_to root_path
+    redirect_to root_path, success: "Theme deleted"
   end
 
   private

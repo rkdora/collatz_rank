@@ -1,7 +1,10 @@
 <h1><%= @theme.title %></h1>
 
-<% unless @theme.nil? %>
+<% unless @theme.body.nil? %>
   <%= simple_format @theme.body %>
+<% end %>
+<% if logged_in? && current_user.admin? %>
+  <%= link_to '編集', edit_theme_path(@theme), class: "btn btn-warning" %>
 <% end %>
 <hr>
 
@@ -23,7 +26,7 @@
         <% end %>
         <% if  logged_in? && (current_user.admin? || current_user == code.user) %>
           <%= link_to "delete", code, method: :delete,
-                        data: { confirm: "You sure?" }, class: "btn btn-warning",
+                        data: { confirm: "You sure?" }, class: "btn btn-danger",
                       style: 'float: right; margin-right: 20px;' %>
         <% end %>
       </li>
