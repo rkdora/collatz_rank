@@ -16,7 +16,7 @@
       <% unless code.code_time.nil? %>
         <li>
           <%= link_to code.user.name, user_path(code.user) %>
-          <%= link_to "time: #{code.code_time.time.to_s}[ms]", code_path(code), style: 'float: right;' %>
+          <%= link_to "#{code.code_time.time.to_s}[ms]　/　　#{simple_time code.code_time.created_at}", code_path(code), style: 'float: right;' %>
           <% if  logged_in? && (current_user.admin? || current_user == code.user) %>
             <%= link_to "delete", code, method: :delete,
                           data: { confirm: "You sure?" }, class: "btn btn-warning", style: 'float: right; margin-right: 20px;' %>
