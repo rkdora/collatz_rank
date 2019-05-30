@@ -21,7 +21,7 @@ class ThemesController < ApplicationController
 
   def show
     @theme = Theme.find(params[:id])
-    @codes = Code.where(theme_id: @theme.id).left_joins(:code_time).order(:time)
+    @codes = Code.joins(:code_time).eager_load(:code_time).where(theme_id: @theme.id).order(:time)
   end
 
   def destroy
