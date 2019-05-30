@@ -1,7 +1,10 @@
 <h1><%= @theme.title %></h1>
 
-<% unless @theme.nil? %>
+<% unless @theme.body.nil? %>
   <%= simple_format @theme.body %>
+<% end %>
+<% if logged_in? && current_user.admin? %>
+  <%= link_to '編集', edit_theme_path(@theme), class: "btn btn-warning" %>
 <% end %>
 <hr>
 
@@ -12,18 +15,20 @@
 <h2>ランキング</h2>
 <% if @codes %>
   <ol>
-    <% @codes.each do |code| %>
-      <% unless code.code_time.nil? %>
-        <li>
-          <%= link_to code.user.name, user_path(code.user) %>
-          <%= link_to "time: #{code.code_time.time.to_s}[ms]", code_path(code), style: 'float: right;' %>
-          <% if  logged_in? && (current_user.admin? || current_user == code.user) %>
-            <%= link_to "delete", code, method: :delete,
-                          data: { confirm: "You sure?" }, class: "btn btn-warning", style: 'float: right; margin-right: 20px;' %>
-          <% end %>
-        </li>
-        <hr>
-      <% end %>
+    <% @codes.each_with_index do |code, i| %>
+      <li>
+        <%= link_to code.user.name, user_path(code.user) %>
+        <% if (logged_in? && (current_user.admin? || current_user == code.user)) || (!i.zero? || !hide_code_time(code)) %>
+          <%= link_to "#{code.code_time.time.to_s}[ms]　/　　#{simple_time code.code_time.created_at}",
+                      code_path(code), style: 'float: right;' %>
+        <% else %>
+          <p style="float: right">
+            ランキングトップのコードは、計測時から7日間を過ぎるまで詳細確認することはできません。
+            <%= "#{code.code_time.time.to_s}[ms]　/　　#{simple_time code.code_time.created_at}" %>
+          </p>
+        <% end %>
+      </li>
+      <hr>
     <% end %>
   </ol>
 <% else %>
