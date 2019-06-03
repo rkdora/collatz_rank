@@ -4,6 +4,23 @@ class ThemesController < ApplicationController
 
   def index
     @themes = Theme.all
+
+    @users = User.all
+    h = Hash.new
+    @users.each do |user|
+      h.store(user.name, 0)
+    end
+
+    Theme.all.each do |theme|
+      rank = Code.joins(:code_time).eager_load(:code_time).where(theme_id: theme.id).order(:time)
+      rank.each_with_index do |code, i|
+        if i < 10 #10位以下はポイントなし
+          h.store(code.user.name, h[code.user.name] + (100 / (i + 1)))
+        end
+      end
+    end
+
+    @points = h.sort_by{ | k, v | v }.reverse
   end
 
   def new

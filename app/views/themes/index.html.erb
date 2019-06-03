@@ -13,4 +13,25 @@
 <% end %>
 
 <hr>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>順位</th>
+      <th>名前</th>
+      <th>ポイント</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @points.each_with_index do |point, i| %>
+      <tr>
+        <td>第<%= i + 1 %>位</td>
+        <td><%= point[0] %></td>
+        <td><%= point[1] %>pt</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<hr>
 <%= render 'themes/changes' %>
