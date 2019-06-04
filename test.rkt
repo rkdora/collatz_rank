@@ -1,2 +1,3 @@
 #lang racket
-    (time (1))
+    (time (apply * (range 1 10)))
+ 

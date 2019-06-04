@@ -1,16 +1,52 @@
+<h2>問題一覧</h2>
 <% @themes.each do |theme| %>
-  <h2>
-    <%= link_to theme.title, theme_path(theme) %>
+  <h3>
+    <%= link_to theme[0].title, theme_path(theme[0]) %>
+    <% if theme.length == 2 %>
+      <small>　<%= theme[1].name %></small>
+    <% end %>
     <% if logged_in? && current_user.admin? %>
-      | <%= link_to "delete", theme, method: :delete,
+      | <%= link_to "delete", theme[0], method: :delete,
                   data: { confirm: "You sure?" } %>
     <% end %>
-  </h2>
+  </h3>
 <% end %>
 
 <% if logged_in? %>
   <%= link_to '問題作成', new_theme_path, class: "btn btn-primary" %>
 <% end %>
+
+<hr>
+
+<h2>レーサーランキング</h2>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>順位</th>
+      <th>名前</th>
+      <th>ポイント</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @points.each_with_index do |point, i| %>
+      <tr>
+        <% if i == 0 %>
+          <td>🥇</td>
+        <% elsif i == 1%>
+          <td>🥈</td>
+        <% elsif i == 2 %>
+          <td>🥉</td>
+        <% else %>
+          <td>第<%= i + 1 %>位</td>
+        <% end %>
+        <td><%= point[0] %></td>
+        <td><%= point[1] %>pt</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<p>ポイント = (100 ÷ 問題内の順位)の総和</p>
 
 <hr>
 <%= render 'themes/changes' %>
