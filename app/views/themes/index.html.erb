@@ -1,8 +1,11 @@
 <% @themes.each do |theme| %>
   <h2>
-    <%= link_to theme.title, theme_path(theme) %>
+    <%= link_to theme[0].title, theme_path(theme[0]) %>
+    <% if theme.length == 2 %>
+      | <%= theme[1].name %>
+    <% end %>
     <% if logged_in? && current_user.admin? %>
-      | <%= link_to "delete", theme, method: :delete,
+      | <%= link_to "delete", theme[0], method: :delete,
                   data: { confirm: "You sure?" } %>
     <% end %>
   </h2>
