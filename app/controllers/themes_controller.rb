@@ -3,7 +3,31 @@ class ThemesController < ApplicationController
   before_action :admin_user, only: %i[edit update destroy]
 
   def index
-    @themes = Theme.all
+    @themes = []
+
+    @users = User.all
+    h = Hash.new
+    @users.each do |user|
+      h.store(user.name, 0)
+    end
+
+    Theme.all.each do |theme|
+      rank = Code.joins(:code_time).eager_load(:code_time).where(theme_id: theme.id).order(:time)
+
+      if rank[0].nil?
+        @themes.push([theme])
+      else
+        @themes.push([theme, rank[0].user])
+      end
+
+      rank.each_with_index do |code, i|
+        if i < 10 #10位以下はポイントなし
+          h.store(code.user.name, h[code.user.name] + (100 / (i + 1)))
+        end
+      end
+    end
+
+    @points = h.sort_by{ | k, v | v }.reverse
   end
 
   def new
