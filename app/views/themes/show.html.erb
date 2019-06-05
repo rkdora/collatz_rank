@@ -21,6 +21,7 @@
     <tr>
       <th>順位</th>
       <th>名前</th>
+      <th>タイム</th>
       <th>計測日時</th>
     </tr>
     </thead>
@@ -37,19 +38,19 @@
           <td>第<%= i + 1 %>位</td>
         <% end %>
         <td><%= code.user.name %></td>
-        <td>
-          <% if (logged_in? && (current_user.admin? || current_user == code.user)) || (!i.zero? || !hide_code_time(code)) %>
-            <%= link_to "#{code.code_time.time.to_s}[ms]　/　　#{simple_time code.code_time.created_at}",
-                        code_path(code), class: 'text-monospace' %>
-          <% else %>
-            <p style="float: right">
-              ランキングトップのコードは、計測時から7日間を過ぎるまで詳細確認することはできません。
-              <%= "#{code.code_time.time.to_s}[ms]　/　　#{simple_time code.code_time.created_at}" %>
-            </p>
-          <% end %>
-        </td>
+        <% if (logged_in? && (current_user.admin? || current_user == code.user)) || (!i.zero? || !hide_code_time(code)) %>
+          <td>
+            <%= link_to "#{code.code_time.time.to_s}[ms]", code_path(code), class: 'text-monospace' %>
+          </td>
+        <% else %>
+          <td>
+            <%= "#{code.code_time.time.to_s}[ms]" %>
+          </td>
+        <% end %>
+        <td><%= simple_time code.code_time.created_at %></td>
       </tr>
     <% end %>
     </tbody>
   </table>
+  <p>ランキングトップのコードは、計測時から7日間を過ぎるまで詳細確認することはできません。</p>
 <% end %>
