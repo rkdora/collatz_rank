@@ -12,25 +12,44 @@
 
 <hr>
 
-<h2>ランキング</h2>
-<% if @codes %>
-  <ol>
-    <% @codes.each_with_index do |code, i| %>
-      <li>
-        <%= link_to code.user.name, user_path(code.user) %>
-        <% if (logged_in? && (current_user.admin? || current_user == code.user)) || (!i.zero? || !hide_code_time(code)) %>
-          <%= link_to "#{code.code_time.time.to_s}[ms]　/　　#{simple_time code.code_time.created_at}",
-                      code_path(code), class: 'text-monospace', style: 'float: right;' %>
-        <% else %>
-          <p style="float: right">
-            ランキングトップのコードは、計測時から7日間を過ぎるまで詳細確認することはできません。
-            <%= "#{code.code_time.time.to_s}[ms]　/　　#{simple_time code.code_time.created_at}" %>
-          </p>
-        <% end %>
-      </li>
-      <hr>
-    <% end %>
-  </ol>
+<% if @codes.length.zero? %>
+  <h4>計測済みのコードはありません</h4>
 <% else %>
-  <p>提出済みのコードはありません</p>
+  <h2>ランキング</h2>
+  <table class="table table-hover">
+    <thead>
+    <tr>
+      <th>順位</th>
+      <th>名前</th>
+      <th>計測日時</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @codes.each_with_index do |code, i| %>
+      <tr>
+        <% if i == 0 %>
+          <td>🥇</td>
+        <% elsif i == 1%>
+          <td>🥈</td>
+        <% elsif i == 2 %>
+          <td>🥉</td>
+        <% else %>
+          <td>第<%= i + 1 %>位</td>
+        <% end %>
+        <td><%= code.user.name %></td>
+        <td>
+          <% if (logged_in? && (current_user.admin? || current_user == code.user)) || (!i.zero? || !hide_code_time(code)) %>
+            <%= link_to "#{code.code_time.time.to_s}[ms]　/　　#{simple_time code.code_time.created_at}",
+                        code_path(code), class: 'text-monospace' %>
+          <% else %>
+            <p style="float: right">
+              ランキングトップのコードは、計測時から7日間を過ぎるまで詳細確認することはできません。
+              <%= "#{code.code_time.time.to_s}[ms]　/　　#{simple_time code.code_time.created_at}" %>
+            </p>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
 <% end %>
