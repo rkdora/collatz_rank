@@ -16,6 +16,8 @@ class ThemesController < ApplicationController
 
       if rank[0].nil?
         @themes.push([theme])
+      elsif (Time.now - rank.first.created_at) < 24.hours
+        @themes.push([theme, rank[0].user, "new"])
       else
         @themes.push([theme, rank[0].user])
       end

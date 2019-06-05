@@ -1,8 +1,12 @@
 <h2>問題一覧</h2>
 <% @themes.each do |theme| %>
   <h3>
-    <%= link_to theme[0].title, theme_path(theme[0]) %>
-    <% if theme.length == 2 %>
+    <% if theme.length == 3 %>
+      <%= link_to theme[0].title, theme_path(theme[0]), class: "text-danger" %>
+    <% else %>
+      <%= link_to theme[0].title, theme_path(theme[0]) %>
+    <% end %>
+    <% if theme.length > 1 %>
       <small>　<%= theme[1].name %></small>
     <% end %>
     <% if logged_in? && current_user.admin? %>
