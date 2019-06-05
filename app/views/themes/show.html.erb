@@ -20,7 +20,7 @@
         <%= link_to code.user.name, user_path(code.user) %>
         <% if (logged_in? && (current_user.admin? || current_user == code.user)) || (!i.zero? || !hide_code_time(code)) %>
           <%= link_to "#{code.code_time.time.to_s}[ms]　/　　#{simple_time code.code_time.created_at}",
-                      code_path(code), style: 'float: right;' %>
+                      code_path(code), class: 'text-monospace', style: 'float: right;' %>
         <% else %>
           <p style="float: right">
             ランキングトップのコードは、計測時から7日間を過ぎるまで詳細確認することはできません。
