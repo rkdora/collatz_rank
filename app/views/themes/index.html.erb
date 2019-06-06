@@ -3,6 +3,8 @@
   <h3>
     <% if theme.length == 3 %>
       <%= link_to theme[0].title, theme_path(theme[0]), class: "text-danger" %>
+    <% elsif theme.length == 1 %>
+      <%= link_to theme[0].title, theme_path(theme[0]), class: "text-info" %>
     <% else %>
       <%= link_to theme[0].title, theme_path(theme[0]) %>
     <% end %>

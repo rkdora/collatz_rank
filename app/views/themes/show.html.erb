@@ -1,7 +1,9 @@
 <h1><%= @theme.title %></h1>
 
 <% unless @theme.body.nil? %>
-  <pre><code><%= @theme.body %></code></pre>
+  <div class="code">
+    <pre><code><%= @theme.body %></code></pre>
+  </div>
 <% end %>
 <% if logged_in? && current_user.admin? %>
   <%= link_to '編集', edit_theme_path(@theme), class: "btn btn-warning" %>
