@@ -19,6 +19,7 @@
 <% unless @code.code_time.nil? %>
   <p>タイム：　<%= link_to "#{@code.code_time.time.to_s} [ms]", theme_path(@code.theme) %></p>
   <p>計測日時：　<%= simple_time @code.code_time.created_at %></p>
+  <p>計測時のuptime：　<%= @code.code_time.uptime %></p>
 
   <hr>
   <p>出力</p>
