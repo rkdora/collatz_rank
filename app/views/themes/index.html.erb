@@ -1,16 +1,20 @@
 <h2>問題一覧</h2>
 <% @themes.each do |theme| %>
   <h3>
-    <% if theme.length == 3 %>
+    <% if theme.length >= 3 && theme[2] == "code" %>
       <%= link_to theme[0].title, theme_path(theme[0]), class: "text-danger" %>
     <% elsif theme.length == 1 %>
       <%= link_to theme[0].title, theme_path(theme[0]), class: "text-info" %>
     <% else %>
       <%= link_to theme[0].title, theme_path(theme[0]) %>
     <% end %>
-    <% if theme.length > 1 %>
+
+    <% if theme.last == "top" %>
+      <small class="text-danger">　<%= theme[1].name %></small>
+    <% elsif theme.length > 1 %>
       <small>　<%= theme[1].name %></small>
     <% end %>
+
     <% if logged_in? && current_user.admin? %>
       | <%= link_to "delete", theme[0], method: :delete,
                   data: { confirm: "You sure?" } %>
