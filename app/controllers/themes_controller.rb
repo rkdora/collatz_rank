@@ -13,13 +13,18 @@ class ThemesController < ApplicationController
 
     Theme.all.each do |theme|
       rank = Code.joins(:code_time).eager_load(:code_time).where(theme_id: theme.id).order(:time)
+      new_code = Code.joins(:code_time).eager_load(:code_time).where(theme_id: theme.id).order(:created_at).last
 
-      if rank[0].nil?
+      if rank.first.nil?
         @themes.push([theme])
+      elsif (Time.now - rank.first.created_at) < 24.hours && (Time.now - new_code.created_at) < 24.hours
+        @themes.push([theme, rank.first.user, rank.count, "code", "top"])
       elsif (Time.now - rank.first.created_at) < 24.hours
-        @themes.push([theme, rank[0].user, "new"])
+        @themes.push([theme, rank.first.user, rank.count, "top"])
+      elsif (Time.now - new_code.created_at) < 24.hours
+        @themes.push([theme, rank.first.user, rank.count, "code"])
       else
-        @themes.push([theme, rank[0].user])
+        @themes.push([theme, rank.first.user, rank.count])
       end
 
       rank.each_with_index do |code, i|
