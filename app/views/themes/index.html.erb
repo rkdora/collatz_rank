@@ -54,7 +54,12 @@
           <td>第<%= i + 1 %>位</td>
         <% end %>
         <td><%= point[0] %></td>
-        <td><%= point[1] %>pt</td>
+        <td>
+          <% (point[1] / 10).times do %>
+            <span style="color: royalblue; letter-spacing: -9px;">|</span>
+          <% end %>
+          &nbsp;<%= point[1] %>pt
+        </td>
       </tr>
     <% end %>
   </tbody>
