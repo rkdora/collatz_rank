@@ -44,6 +44,10 @@ class ThemesController < ApplicationController
   def create
     @theme = Theme.new(theme_params)
     if @theme.save
+      params[:theme][:image]&.each do |i|
+        image = ThemeImage.new(theme_id: @theme.id, image: i)
+        image.save
+      end
       redirect_to @theme, success: 'テーマを作成しました'
     else
       render :new
@@ -62,6 +66,10 @@ class ThemesController < ApplicationController
   def update
     @theme = Theme.find(params[:id])
     if @theme.update(theme_params)
+      params[:theme][:image]&.each do |i|
+        image = ThemeImage.new(theme_id: @theme.id, image: i)
+        image.save
+      end
       redirect_to @theme, success: "Theme updated"
     else
       render :edit
