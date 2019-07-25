@@ -5,6 +5,9 @@
     <pre><code><%= @theme.body %></code></pre>
   </div>
 <% end %>
+<% @theme.theme_images.each do |i| %>
+  <%= image_tag i.image.url, width: 300 %>
+<% end %>
 <% if logged_in? && current_user.admin? %>
   <%= link_to '編集', edit_theme_path(@theme), class: "btn btn-warning" %>
 <% end %>
