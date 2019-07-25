@@ -7,5 +7,19 @@
   <%= f.label :body %>
   <%= f.text_area :body, class: 'form-control', style: "height: 50vh;" %>
   <p>回答例を載せましょう。</p>
+  <%= f.label :image %></br>
+  <% @theme.theme_images.each do |i| %>
+    <%= image_tag i.image.url, width: 300 %>
+  <% end %><br/>
+  ※画像は5MBまで</br>
+  <%= f.file_field :image, multiple: true %>
+  <%= f.file_field :image, multiple: true %>
+  <%= f.file_field :image, multiple: true %>
+  <%= f.file_field :image, multiple: true %>
+  <%= f.file_field :image, multiple: true %>
+  <%= f.file_field :image, multiple: true %>
+  <%= f.file_field :image, multiple: true %>
+  <%= f.file_field :image, multiple: true %>
+  <%= f.file_field :image, multiple: true %>
   <%= f.submit '更新', class: 'btn btn-primary' %>
 <% end %>

@@ -32,3 +32,5 @@
 
 # Ignore RubyMine settings
 .idea/*
+
+/public/uploads/**
