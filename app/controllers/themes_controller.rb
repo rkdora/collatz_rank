@@ -34,6 +34,8 @@ class ThemesController < ApplicationController
       end
     end
 
+    @themes.reverse!
+
     @points = h.sort_by{ | k, v | v }.reverse
   end
 
