@@ -10,6 +10,7 @@
   <%= f.label :image %></br>
   <% @theme.theme_images.each do |i| %>
     <%= image_tag i.image.url, width: 300 %>
+    <%= f.check_box :checked_images, {multiple: true, include_hidden: false}, i.id %>
   <% end %><br/>
   ※画像は5MBまで</br>
   <%= f.file_field :image, multiple: true %>
