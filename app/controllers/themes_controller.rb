@@ -34,6 +34,8 @@ class ThemesController < ApplicationController
       end
     end
 
+    @themes.reverse!
+
     @points = h.sort_by{ | k, v | v }.reverse
   end
 
@@ -42,13 +44,21 @@ class ThemesController < ApplicationController
   end
   
   def create
+    image_error = false
     @theme = Theme.new(theme_params)
     if @theme.save
       params[:theme][:image]&.each do |i|
         image = ThemeImage.new(theme_id: @theme.id, image: i)
-        image.save
+        unless image.save
+          image_error = true
+          break
+        end
       end
-      redirect_to @theme, success: 'テーマを作成しました'
+      if image_error
+        redirect_to @theme, danger: '問題を作成しましたが、画像のアップロードに失敗しました。'
+      else
+        redirect_to @theme, success: '問題を作成しました'
+      end
     else
       render :new
     end
@@ -64,13 +74,24 @@ class ThemesController < ApplicationController
   end
 
   def update
+    image_error = false
     @theme = Theme.find(params[:id])
     if @theme.update(theme_params)
+      params[:theme][:checked_images]&.each do |i|
+        ThemeImage.find(i).destroy
+      end
       params[:theme][:image]&.each do |i|
         image = ThemeImage.new(theme_id: @theme.id, image: i)
-        image.save
+        unless image.save
+          image_error = true
+          break
+        end
       end
-      redirect_to @theme, success: "Theme updated"
+      if image_error
+        redirect_to @theme, danger: '問題を更新しましたが、画像のアップロードに失敗しました。'
+      else
+        redirect_to @theme, success: '問題を更新しました'
+      end
     else
       render :edit
     end
@@ -78,7 +99,7 @@ class ThemesController < ApplicationController
 
   def destroy
     Theme.find(params[:id]).destroy
-    redirect_to root_path, success: "Theme deleted"
+    redirect_to root_path, success: "問題を削除しました"
   end
 
   private
