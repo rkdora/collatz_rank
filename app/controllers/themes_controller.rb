@@ -77,6 +77,9 @@ class ThemesController < ApplicationController
     image_error = false
     @theme = Theme.find(params[:id])
     if @theme.update(theme_params)
+      params[:theme][:checked_images]&.each do |i|
+        ThemeImage.find(i).destroy
+      end
       params[:theme][:image]&.each do |i|
         image = ThemeImage.new(theme_id: @theme.id, image: i)
         unless image.save
