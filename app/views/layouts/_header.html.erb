@@ -7,6 +7,9 @@
     <div class="collapse navbar-collapse justify-content-end">
       <ul class="navbar-nav">
         <li class="nav-item">
+          <%= link_to '1Day100', users_path, class: "nav-link" %>
+        </li>
+        <li class="nav-item">
           <%= link_to 'レーサーリスト', users_path, class: "nav-link" %>
         </li>
         <% if logged_in? %>
