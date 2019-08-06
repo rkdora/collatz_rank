@@ -3,12 +3,12 @@ class TimesController < ApplicationController
 
   def create
     @code = Code.find(params[:time][:code_id])
-    File.open('test.rkt', 'w') do |text|
+    File.open('public/uploads/theme_images/test.rkt', 'w') do |text|
       text.puts(@code.content)
     end
     uptime = `uptime`
     uptime = uptime.split.last(3).first.to_f
-    code_out_put = `racket test.rkt`
+    code_out_put = `racket public/uploads/theme_images/test.rkt`
     cpu_time = code_out_put.match(/time:/).post_match.to_i
     @code_time = CodeTime.new(code_id: @code.id,
                               time: cpu_time,

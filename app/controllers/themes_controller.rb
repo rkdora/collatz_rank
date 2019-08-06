@@ -1,6 +1,6 @@
 class ThemesController < ApplicationController
   before_action :authorize, only: %i[new create edit update destory]
-  before_action :admin_user, only: %i[edit update destroy]
+  before_action :admin_user, only: %i[destroy]
 
   def index
     @themes = []
@@ -55,7 +55,8 @@ class ThemesController < ApplicationController
         end
       end
       if image_error
-        redirect_to @theme, danger: '問題を作成しましたが、画像のアップロードに失敗しました。'
+        flash.now[:danger] = "画像のアップロードに失敗しました。ファイル形式、ファイルサイズ、ファイル名を確認してください。"
+        render :edit
       else
         redirect_to @theme, success: '問題を作成しました'
       end
@@ -88,7 +89,8 @@ class ThemesController < ApplicationController
         end
       end
       if image_error
-        redirect_to @theme, danger: '問題を更新しましたが、画像のアップロードに失敗しました。'
+        flash.now[:danger] = "画像のアップロードに失敗しました。ファイル形式、ファイルサイズ、ファイル名を確認してください。"
+        render :edit
       else
         redirect_to @theme, success: '問題を更新しました'
       end

@@ -13,7 +13,7 @@
     </div>
   <% end %>
 </div>
-<% if logged_in? && current_user.admin? %>
+<% if logged_in? %>
   <%= link_to '編集', edit_theme_path(@theme), class: "btn btn-warning" %>
 <% end %>
 <hr>

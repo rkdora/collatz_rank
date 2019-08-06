@@ -8,11 +8,15 @@
   <%= f.text_area :body, class: 'form-control', style: "height: 50vh;" %>
   <p>回答例を載せましょう。</p>
   <%= f.label :image %></br>
+  <p>削除する画像を選択してください</p>
   <% @theme.theme_images.each do |i| %>
     <%= image_tag i.image.url, width: 300 %>
     <%= f.check_box :checked_images, {multiple: true, include_hidden: false}, i.id %>
   <% end %><br/>
+  <br />
   ※画像は5MBまで</br>
+  ※ファイル名の重複禁止</br>
+  ※ファイル形式は、「jpg jpeg gif png」のみ</br>
   <%= f.file_field :image, multiple: true %>
   <%= f.file_field :image, multiple: true %>
   <%= f.file_field :image, multiple: true %>
